@@ -60,7 +60,6 @@ import id.my.dsm.routemate.data.event.model.OnRetrieveDSMUser;
 import id.my.dsm.routemate.data.event.model.OnUpdateDSMUser;
 import id.my.dsm.routemate.data.event.model.OnUpdateUserSession;
 import id.my.dsm.routemate.data.event.model.OnUserStatusChangedEvent;
-import id.my.dsm.routemate.data.event.view.OnBottomSheetStateChanged;
 import id.my.dsm.routemate.data.event.view.OnMainActivityFeatureRequest;
 import id.my.dsm.routemate.data.event.view.OnMainActivityShowCaseRequest;
 import id.my.dsm.routemate.data.event.view.OnProgressIndicatorUpdate;
@@ -255,25 +254,22 @@ public class MainActivity extends AppCompatActivity
 
             binding.parentMainActivity.closeDrawer(GravityCompat.START); // Close drawer
 
-            switch (item.getItemId()) {
-                case R.id.settings_item:
-                    // Go to settings fragment
-                    new ApplicationSettingsFragment().show(getSupportFragmentManager(), "");
-                    break;
-                case R.id.policy_item:
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_tc_url)));
-                    startActivity(browserIntent);
-                    break;
-                case R.id.about_item:
-                    new MaterialAlertDialogBuilder(this)
-                            .setTitle("About")
-                            .setMessage(getString(R.string.about_dialog_message))
-                            .setPositiveButton("Version Info", (dialogInterface, i) -> {
-                                MaterialDialogTemplate.showVersionInfo(this, null);
-                            })
-                            .setNeutralButton("Close", null)
-                            .show();
-                    break;
+            int itemId = item.getItemId();
+            if (itemId == R.id.settings_item) {
+                // Go to settings fragment
+                new ApplicationSettingsFragment().show(getSupportFragmentManager(), "");
+            } else if (itemId == R.id.policy_item) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_tc_url)));
+                startActivity(browserIntent);
+            } else if (itemId == R.id.about_item) {
+                new MaterialAlertDialogBuilder(this)
+                        .setTitle("About")
+                        .setMessage(getString(R.string.about_dialog_message))
+                        .setPositiveButton("Version Info", (dialogInterface, i) -> {
+                            MaterialDialogTemplate.showVersionInfo(this, null);
+                        })
+                        .setNeutralButton("Close", null)
+                        .show();
             }
             return true;
         });
@@ -291,19 +287,14 @@ public class MainActivity extends AppCompatActivity
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 switch (newState) {
                     case BottomSheetBehavior.STATE_COLLAPSED:
-                        binding.appBarLayout.setExpanded(true);
-                        break;
                     case BottomSheetBehavior.STATE_HALF_EXPANDED:
                         binding.appBarLayout.setExpanded(true);
                         break;
                     case BottomSheetBehavior.STATE_EXPANDED:
-                        binding.appBarLayout.setExpanded(false);
-                        break;
-                    case BottomSheetBehavior.STATE_SETTLING:
-                        break;
                     case BottomSheetBehavior.STATE_HIDDEN:
                         binding.appBarLayout.setExpanded(false);
                         break;
+                    case BottomSheetBehavior.STATE_SETTLING:
                     case BottomSheetBehavior.STATE_DRAGGING:
                         break;
                 }

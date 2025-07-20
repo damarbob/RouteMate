@@ -157,25 +157,22 @@ public class VehicleRecViewAdapter extends RecyclerView.Adapter<VehicleRecViewAd
 
             // Set listeners
             optionsMenu.getPopupMenu().setOnMenuItemClickListener(item -> {
-                switch (item.getItemId()) {
-                    case R.id.vehicle_set_default_item:
-                        if (vehicle.isDefault()) {
-                            Toast.makeText(context, "The fleet is already default", Toast.LENGTH_SHORT).show();
-                            break;
-                        }
+                int itemId = item.getItemId();
+                if (itemId == R.id.vehicle_set_default_item) {
+                    if (vehicle.isDefault()) {
+                        Toast.makeText(context, "The fleet is already default", Toast.LENGTH_SHORT).show();
+                    } else {
                         // Post repository event
                         alterRepositoryUseCase.invoke(OnRepositoryUpdate.Event.ACTION_SET_DEFAULT, fleet, true);
                         notifyItemRangeChanged(0, objects.size()); // Notify specific item has changed
-                        break;
-                    case R.id.vehicle_delete_item:
-                        if (!vehicle.isDefault()) {
-                            // Post repository event
-                            alterRepositoryUseCase.invoke(OnRepositoryUpdate.Event.ACTION_DELETE, fleet, true);
-                            notifyItemRemoved(position); // Notify item removed
-                        }
-                        else
-                            Toast.makeText(context, "Unable to delete default fleet!", Toast.LENGTH_SHORT).show();
-                        break;
+                    }
+                } else if (itemId == R.id.vehicle_delete_item) {
+                    if (!vehicle.isDefault()) {
+                        // Post repository event
+                        alterRepositoryUseCase.invoke(OnRepositoryUpdate.Event.ACTION_DELETE, fleet, true);
+                        notifyItemRemoved(position); // Notify item removed
+                    } else
+                        Toast.makeText(context, "Unable to delete default fleet!", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             });

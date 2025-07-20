@@ -94,28 +94,25 @@ public class PlaceRecViewAdapter extends RecyclerView.Adapter<PlaceRecViewAdapte
 
             // Set listeners
             optionsMenu.getPopupMenu().setOnMenuItemClickListener(item -> {
-                switch (item.getItemId()) {
-                    case R.id.place_goto_item:
-                        // Center the camera to selected objective
-                        EventBus.getDefault().post(
-                                new OnMapsViewModelRequest.Builder(OnMapsViewModelRequest.Event.ACTION_CENTER_CAMERA)
-                                        .withObjective(place)
-                                        .build()
-                        );
+                int itemId = item.getItemId();
+                if (itemId == R.id.place_goto_item) {
+                    // Center the camera to selected objective
+                    EventBus.getDefault().post(
+                            new OnMapsViewModelRequest.Builder(OnMapsViewModelRequest.Event.ACTION_CENTER_CAMERA)
+                                    .withObjective(place)
+                                    .build()
+                    );
 
-                        // TODO: Use args
-                        // Navigate to location fragment
-                        EventBus.getDefault().post(new OnSelectedPlaceChangedEvent(place));
-                        navController.navigate(R.id.action_global_locationFragment);
-                        break;
-                    case R.id.place_delete_item:
-                        // Post repository event
-                        alterRepositoryUseCase.invoke(OnRepositoryUpdate.Event.ACTION_DELETE, place, true);
-                        break;
+                    // TODO: Use args
+                    // Navigate to location fragment
+                    EventBus.getDefault().post(new OnSelectedPlaceChangedEvent(place));
+                    navController.navigate(R.id.action_global_locationFragment);
+                } else if (itemId == R.id.place_delete_item) {
+                    // Post repository event
+                    alterRepositoryUseCase.invoke(OnRepositoryUpdate.Event.ACTION_DELETE, place, true);
                 }
                 return true;
             });
-
             optionsMenu.show(); // Show options menu
             return true;
 
