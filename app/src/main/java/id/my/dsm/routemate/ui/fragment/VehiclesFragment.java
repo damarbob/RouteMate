@@ -130,23 +130,20 @@ public class VehiclesFragment extends Fragment {
             OptionsMenu optionsMenu = new OptionsMenu(getContext(), v, R.menu.menu_popup_vehicles);
 
             optionsMenu.getPopupMenu().setOnMenuItemClickListener(item -> {
-                switch (item.getItemId()) {
-                    case R.id.vehicles_clear:
-                        new MaterialAlertDialogBuilder(requireContext())
-                                .setTitle("Clear Vehicles")
-                                .setMessage("This will clear vehicles except the default and the online.")
-                                .setPositiveButton("Continue", (dialogInterface, i) -> {
-                                    mViewModel.clearVehicles();
-                                })
-                                .setNeutralButton("Cancel", (dialogInterface, i) -> {
-                                    dialogInterface.cancel();
-                                })
-                                .show();
-
-                        break;
-                    case R.id.vehicles_show_hint:
-                        forceShowIntroShowCase();
-                        break;
+                int itemId = item.getItemId();
+                if (itemId == R.id.vehicles_clear) {
+                    new MaterialAlertDialogBuilder(requireContext())
+                            .setTitle("Clear Vehicles")
+                            .setMessage("This will clear vehicles except the default and the online.")
+                            .setPositiveButton("Continue", (dialogInterface, i) -> {
+                                mViewModel.clearVehicles();
+                            })
+                            .setNeutralButton("Cancel", (dialogInterface, i) -> {
+                                dialogInterface.cancel();
+                            })
+                            .show();
+                } else if (itemId == R.id.vehicles_show_hint) {
+                    forceShowIntroShowCase();
                 }
                 return true;
             });

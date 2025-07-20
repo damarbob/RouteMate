@@ -171,27 +171,24 @@ public class OptimizationFragment extends Fragment implements OptimizationFilter
 
             // Set listeners
             optionsMenu.getPopupMenu().setOnMenuItemClickListener(item -> {
-                switch (item.getItemId()) {
-                    case R.id.optimization_clear_result:
-                        // Clear solution directions route line
-                        new MaterialAlertDialogBuilder(requireContext())
-                                .setTitle("Clear Route")
-                                .setMessage("This will clear the route and directions. You will have to do optimization again to obtain a new route.")
-                                .setPositiveButton("Proceed", (dialogInterface, i) -> {
+                if (item.getItemId() == R.id.optimization_clear_result) {
+                    // Clear solution directions route line
+                    new MaterialAlertDialogBuilder(requireContext())
+                            .setTitle("Clear Route")
+                            .setMessage("This will clear the route and directions. You will have to do optimization again to obtain a new route.")
+                            .setPositiveButton("Proceed", (dialogInterface, i) -> {
 
-                                    // Clear route
-                                    mViewModel.clearSolutionsAndDirections();
+                                // Clear route
+                                mViewModel.clearSolutionsAndDirections();
 
-                                    refreshFeatureStatus(); // Refresh features
+                                refreshFeatureStatus(); // Refresh features
 
-                                })
-                                .setNeutralButton("Cancel", null)
-                                .show();
+                            })
+                            .setNeutralButton("Cancel", null)
+                            .show();
 
-                        break;
-                    case R.id.optimization_show_hint:
-                        forceShowIntroShowCase();
-                        break;
+                } else if (item.getItemId() == R.id.optimization_show_hint) {
+                    forceShowIntroShowCase();
                 }
                 return true;
             });
@@ -199,10 +196,10 @@ public class OptimizationFragment extends Fragment implements OptimizationFilter
         });
         binding.buttonOptimizationHint.setOnClickListener(v -> forceShowIntroShowCase());
         binding.buttonOptimizationAddSource.setOnClickListener(v ->
-            NavHostFragment.findNavController(this).navigate(R.id.action_optimizationFragment_to_placesFragment)
+                NavHostFragment.findNavController(this).navigate(R.id.action_optimizationFragment_to_placesFragment)
         );
         binding.buttonOptimizationAddDestination.setOnClickListener(v ->
-            NavHostFragment.findNavController(this).navigate(R.id.action_optimizationFragment_to_placesFragment)
+                NavHostFragment.findNavController(this).navigate(R.id.action_optimizationFragment_to_placesFragment)
         );
         binding.buttonOptimizationFilter.setOnClickListener(view -> {
             OptimizationFilterFragment optimizationFilterFragment = new OptimizationFilterFragment();
@@ -257,8 +254,7 @@ public class OptimizationFragment extends Fragment implements OptimizationFilter
 
             showIntroShowCase();
 
-        }
-        else
+        } else
             new MaterialAlertDialogBuilder(requireContext())
                     .setTitle("Please Sign In")
                     .setMessage("Please sign in to enable optimization feature")
@@ -327,13 +323,11 @@ public class OptimizationFragment extends Fragment implements OptimizationFilter
 
             if (placesStatus == PLACES_IS_READY && transportStatus == VEHICLES_IS_READY) {
                 binding.cardOptimizationGetStarted.setVisibility(VISIBLE);
-            }
-            else {
+            } else {
                 binding.cardOptimizationGetStarted.setVisibility(GONE);
             }
 
-        }
-        else {
+        } else {
             binding.cardOptimizationGetStarted.setVisibility(GONE);
         }
 
@@ -352,8 +346,7 @@ public class OptimizationFragment extends Fragment implements OptimizationFilter
             binding.imageOptimizationStatusDone.setVisibility(VISIBLE);
             binding.imageOptimizationStatusError.setVisibility(GONE);
             binding.layoutOptimizationStatus.setVisibility(solutionRepository.getRecordsCount() > 0 ? GONE : VISIBLE);
-        }
-        else {
+        } else {
             binding.textOptimizationStatus.setText(R.string.status_need_action);
             binding.imageOptimizationStatusDone.setVisibility(GONE);
             binding.imageOptimizationStatusError.setVisibility(VISIBLE);
@@ -400,7 +393,7 @@ public class OptimizationFragment extends Fragment implements OptimizationFilter
                                             "Optimization Options",
                                             "Show more optimization options",
                                             binding.buttonOptimizationOptions
-                                            );
+                                    );
 
                                 }
 

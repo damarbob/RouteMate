@@ -257,19 +257,15 @@ public class HomeFragment extends Fragment {
         OptionsMenu optionsMenu = new OptionsMenu(getContext(), anchorView, R.menu.menu_popup_home);
 
         optionsMenu.getPopupMenu().setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.home_switch_menu_layout:
+            int itemId = item.getItemId();
+            if (itemId == R.id.home_switch_menu_layout) {
+                // Switch layout and update value
+                isMenuGridLayout = !isMenuGridLayout;
+                RouteMatePref.saveBoolean(requireActivity(), RouteMatePref.HOME_MENU_LAYOUT_GRID_KEY, isMenuGridLayout);
 
-                    // Switch layout and update value
-                    isMenuGridLayout = !isMenuGridLayout;
-                    RouteMatePref.saveBoolean(requireActivity(), RouteMatePref.HOME_MENU_LAYOUT_GRID_KEY, isMenuGridLayout);
-
-                    rvMainMenu.setLayoutManager(isMenuGridLayout ? gridLayoutManager : linearLayoutManager);
-
-                    break;
-                case R.id.home_show_intro:
-                    showAppIntro();
-                    break;
+                rvMainMenu.setLayoutManager(isMenuGridLayout ? gridLayoutManager : linearLayoutManager);
+            } else if (itemId == R.id.home_show_intro) {
+                showAppIntro();
             }
             return true;
         });

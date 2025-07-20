@@ -310,27 +310,23 @@ PlacesFragment extends Fragment {
         OptionsMenu optionsMenu = new OptionsMenu(getContext(), anchorView, R.menu.menu_popup_places);
 
         optionsMenu.getPopupMenu().setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.places_clear:
-                    new MaterialAlertDialogBuilder(requireContext())
-                            .setTitle("Clear Places")
-                            .setMessage("This will clear places on the map and clear the list.")
-                            .setPositiveButton("Continue", (dialogInterface, i) -> {
-                                mViewModel.clearPlaces();
-                            })
-                            .setNeutralButton("Cancel", (dialogInterface, i) -> {
-                                dialogInterface.cancel();
-                            })
-                            .show();
-
-                    break;
-                case R.id.places_show_hint:
-                    forceShowIntroShowCase();
-                    break;
+            int itemId = item.getItemId();
+            if (itemId == R.id.places_clear) {
+                new MaterialAlertDialogBuilder(requireContext())
+                        .setTitle("Clear Places")
+                        .setMessage("This will clear places on the map and clear the list.")
+                        .setPositiveButton("Continue", (dialogInterface, i) -> {
+                            mViewModel.clearPlaces();
+                        })
+                        .setNeutralButton("Cancel", (dialogInterface, i) -> {
+                            dialogInterface.cancel();
+                        })
+                        .show();
+            } else if (itemId == R.id.places_show_hint) {
+                forceShowIntroShowCase();
             }
             return true;
         });
-
         optionsMenu.show(); // Show options menu
     }
 
