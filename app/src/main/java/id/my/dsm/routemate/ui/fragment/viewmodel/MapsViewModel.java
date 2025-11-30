@@ -399,7 +399,6 @@ public class MapsViewModel extends ViewModel implements
         // Re/assign listener
         mapboxMap.addOnMapClickListener(point -> {
 
-            // TODO: DELETE addOnMapClickListener! Has been replaced by addOnMapLongClickListener
             // Adds marker if drawing mode enabled
             if (isDrawingMode.getValue() != null && isDrawingMode.getValue()) {
 
@@ -416,13 +415,14 @@ public class MapsViewModel extends ViewModel implements
 
         });
         mapboxMap.addOnMapLongClickListener(point -> {
-//            Location.Profile mapboxProfile = placeRepository.getAutoProfile();
-//            Place place = Place.Toolbox.createObjectiveFromMapboxLatLng(point, mapboxProfile);
-//
-//            alterRepositoryUseCase.invoke(OnRepositoryUpdate.Event.ACTION_CREATE, place, true);
+            // TODO: Decide whether or not using long click to add points. Review the UX. Once decided, remove this todo.
+            Location.Profile mapboxProfile = placeRepository.getAutoProfile();
 
-//            mapboxDirectionsRouteManager.clearMapboxDirectionsRouteLines(mapboxDirectionsRouteRepository.getRecords());
+            Place place = Place.Toolbox.createObjectiveFromMapboxLatLng(point, mapboxProfile);
 
+            alterRepositoryUseCase.invoke(OnRepositoryUpdate.Event.ACTION_CREATE, place, true);
+
+            mapboxDirectionsRouteManager.clearMapboxDirectionsRouteLines(mapboxDirectionsRouteRepository.getRecords());
 
             return true;
         });
@@ -632,9 +632,9 @@ public class MapsViewModel extends ViewModel implements
                 // TODO
                 break;
             case RECORDS_CLEARED:
-//                Toast.makeText(context, "YES. DirectionsRoutes: " + mapboxDirectionsRouteRepository.getRecordsCount() + ". " + Thread.currentThread(), Toast.LENGTH_SHORT).show();
-//                reloadMap();
-//                mapboxDirectionsRouteManager.clearMapboxDirectionsRouteLines(mapboxDirectionsRouteRepository.getRecords());
+                // Toast.makeText(context, "YES. DirectionsRoutes: " + mapboxDirectionsRouteRepository.getRecordsCount() + ". " + Thread.currentThread(), Toast.LENGTH_SHORT).show();
+                // reloadMap();
+                // mapboxDirectionsRouteManager.clearMapboxDirectionsRouteLines(mapboxDirectionsRouteRepository.getRecords());
                 break;
 
         }
@@ -666,7 +666,6 @@ public class MapsViewModel extends ViewModel implements
                 break;
             case ACTION_CLEAR_ROUTE_LINE:
                 // Used by OptimizationViewModel
-                Toast.makeText(context, "NO", Toast.LENGTH_SHORT).show();
                 mapboxDirectionsRouteManager.clearMapboxDirectionsRouteLines(event.getMapboxDirectionsRoutes());
                 break;
             case ACTION_RELOAD_MAP:
