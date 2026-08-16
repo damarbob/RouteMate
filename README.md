@@ -1,10 +1,10 @@
 # RouteMate
 RouteMate is an open-source all-in-one solution for any route optimization problems. Built for mobile on top of Android’s Java &amp; Kotlin.
-[Official Website](https://dsm.my.id/RouteMate/)
+[Official Website](https://konstelasi.co.id/software/routemate/)
 
-[<img src="https://dsm.my.id/wp-content/uploads/2023/04/2.jpg" alt="ko-fi" width="192px"/>](https://dsm.my.id/wp-content/uploads/2023/04/2.jpg)
-[<img src="https://dsm.my.id/wp-content/uploads/2023/04/3.jpg" alt="ko-fi" width="192px"/>](https://dsm.my.id/wp-content/uploads/2023/04/3.jpg)
-[<img src="https://dsm.my.id/wp-content/uploads/2023/04/4.jpg" alt="ko-fi" width="192px"/>](https://dsm.my.id/wp-content/uploads/2023/04/4.jpg)
+<img src="docs/images/promo-1.jpg" alt="Add and customize your places" width="192px"/>
+<img src="docs/images/promo-2.jpg" alt="Lightweight, simple, and intuitive UI" width="192px"/>
+<img src="docs/images/promo-3.jpg" alt="Optimized route with per-stop distances" width="192px"/>
 
 ## Description
 Route optimization is a few clicks away! RouteMate is suitable for both beginner and expert users. Having difficulties finding the best route? RouteMate answers your problem.
