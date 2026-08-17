@@ -56,4 +56,4 @@ googleApiKey="YOUR_API_KEY"
 
 All trademarks are the property of their respective owners.
 
-© DSM 2023
+© DSM
