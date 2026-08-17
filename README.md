@@ -12,7 +12,7 @@ Route optimization is a few clicks away! RouteMate is suitable for both beginner
 - Fleet management - Customize vehicles used in your fleet
 - Optimization - Get the best route to begin a trip with
 - Sync - Synchronize your data across all devices (sign-in required)
-- Distance matrix (soon) - Edit each matrix element to improve precision further or recalculate the entire matrix
+- Distance matrix - Edit each matrix element to improve precision further or recalculate the entire matrix
 
 ## Installation
 ### 1. Setting up Mapbox Access Token
@@ -33,6 +33,7 @@ pk.
 - Sign in to [Firebase Console](https://console.firebase.google.com/)
 - Create a new project (optionally, you can link the previous Google Cloud project)
 - Add an Android app and follow the instructions carefully (setup instructions are provided by Firebase)
+- Download the `google-services.json` file and place it in the `app` directory.
 
 ### 4. Setting up project
 - Save the project to your local disk either by downloading the zip or cloning the repository
@@ -51,8 +52,14 @@ googleApiKey="YOUR_API_KEY"
 - Mapbox: Maps API, Matrix API, Optimization API, Geocoding API, Directions API (optimization)
 - Google Maps: Distance Matrix API (distance calculation)
 - Firebase: Auth, Realtime Database (backend)
+- Dagger Hilt: Dependency injection
+- Room: Local database
+- Jetpack Navigation: In-app navigation
 - EventBus (universal event handler)
 - TrueTime (timekeeper)
+- DSMSolver: Custom solver for optimization
+- Lottie: Animations
+- MaterialDialog: Custom dialogs
 
 All trademarks are the property of their respective owners.
 
